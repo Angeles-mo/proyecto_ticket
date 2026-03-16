@@ -1,48 +1,27 @@
-package com.ticketworld.Ticketworld.entity;
+package com.ticketworld.Ticketworld.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ticketworld.Ticketworld.dto.ArtistDTO;
-import jakarta.persistence.*;
-import lombok.ToString;
+import com.ticketworld.Ticketworld.entity.Account;
+import com.ticketworld.Ticketworld.entity.Event;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-public class Artist {
+public class ArtistDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
     private String lastName;
-
-    @Column
     private String musicGenre;
-
-    @Column
     private String biography;
-
-    @ManyToMany(mappedBy = "artists")
-    @ToString.Exclude
     private Set<Event> events = new HashSet<>();
-
-    @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
-    @JsonIgnore
     private Account account;
 
     //Constructor sin parámetros
-    public Artist(){
-
+    public ArtistDTO(){
     }
 
     //Constructor con parámetros
-    public Artist(Long id, String name, String lastName, String musicGenre, String biography, Set<Event> events, Account account){
+    public ArtistDTO(Long id, String name, String lastName, String musicGenre, String biography, Set<Event> events, Account account){
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -50,33 +29,6 @@ public class Artist {
         this.biography = biography;
         this.events = events;
         this.account = account;
-    }
-
-    //Pasar de DTO a entidad
-    public Artist(ArtistDTO artistDTO){
-        this.id = artistDTO.getId();
-        this.name = artistDTO.getName();
-        this.lastName = artistDTO.getLastName();
-        this.musicGenre = artistDTO.getMusicGenre();
-        this.biography = artistDTO.getBiography();
-        this.events = artistDTO.getEvents();
-        this.account = artistDTO.getAccount();
-    }
-
-    //Pasar de una entidad a una DTO
-    public static ArtistDTO toDTO(Artist artist){
-        if (artist == null){
-            return null;
-        }
-        return new ArtistDTO(
-                artist.getId(),
-                artist.getName(),
-                artist.getLastName(),
-                artist.getMusicGenre(),
-                artist.getBiography(),
-                artist.getEvents(),
-                artist.getAccount()
-        );
     }
 
     //Getters and Setters

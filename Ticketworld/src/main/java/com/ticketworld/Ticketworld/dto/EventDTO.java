@@ -1,56 +1,34 @@
-package com.ticketworld.Ticketworld.entity;
+package com.ticketworld.Ticketworld.dto;
 
-import com.ticketworld.Ticketworld.dto.EventDTO;
-import jakarta.persistence.*;
-import lombok.ToString;
+import com.ticketworld.Ticketworld.entity.Artist;
+import com.ticketworld.Ticketworld.entity.Place;
+import com.ticketworld.Ticketworld.entity.Status;
+import com.ticketworld.Ticketworld.entity.TicketType;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
-public class Event {
+public class EventDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "place_id", nullable = false)
     private Place place;
-
-    @Column(nullable = false)
     private String title;
-
-    @Column(nullable = false)
     private String description;
-
-    @Column(nullable = false)
     private Date dateStartTime;
-
-    @Column(nullable = false)
     private Date dateEndTime;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private Status status;
-
-    @ManyToMany
-    @JoinTable(name = "event_artist", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "artist_id"))
-    @ToString.Exclude
     private Set<Artist> artists = new HashSet<>();
-
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TicketType> ticketTypes;
 
     //Constructores sin parámetros
-    public Event(){
+    public EventDTO(){
 
     }
 
     //Constructores con parámetros
-    public Event(Long id, Place place, String title, String description, Date dateStartTime, Date dateEndTime, Status status, Set<Artist> artists, List<TicketType> ticketTypes){
+    public EventDTO(Long id, Place place, String title, String description, Date dateStartTime, Date dateEndTime, Status status, Set<Artist> artists, List<TicketType> ticketTypes){
         this.id = id;
         this.place = place;
         this.title = title;
@@ -60,36 +38,6 @@ public class Event {
         this.status = status;
         this.artists = artists;
         this.ticketTypes = ticketTypes;
-    }
-
-    //Pasar de DTO a entidad
-    public Event(EventDTO eventDTO){
-        this.id = eventDTO.getId();
-        this.place = eventDTO.getPlace();
-        this.title = eventDTO.getTitle();
-        this.description = eventDTO.getDescription();
-        this.dateStartTime = eventDTO.getDateStartTime();
-        this.dateEndTime = eventDTO.getDateEndTime();
-        this.status = eventDTO.getStatus();
-        this.artists = eventDTO.getArtists();
-        this.ticketTypes = eventDTO.getTicketTypes();
-    }
-
-    //Pasar de entidad a DTO
-    public static EventDTO toDto(Event event){
-        if ((event == null)){
-            return null;
-        }return new EventDTO(
-              event.getId(),
-              event.getPlace(),
-              event.getTitle(),
-              event.getDescription(),
-              event.getDateStartTime(),
-              event.getDateEndTime(),
-              event.getStatus(),
-              event.getArtists(),
-              event.getTicketTypes()
-        );
     }
 
     //Getter and Setter

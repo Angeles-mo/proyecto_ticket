@@ -1,48 +1,28 @@
-package com.ticketworld.Ticketworld.entity;
+package com.ticketworld.Ticketworld.dto;
 
-import com.ticketworld.Ticketworld.dto.PlaceDTO;
-import jakarta.persistence.*;
+import com.ticketworld.Ticketworld.entity.Event;
 
 import java.util.List;
 
-@Entity
-public class Place {
+public class PlaceDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
     private String address;
-
-    @Column(nullable = false)
     private String city;
-
-    @Column(nullable = false)
     private String province;
-
-    @Column(nullable = false)
     private String country;
-
-    @Column(nullable = false)
     private Integer totalCapacity;
-
-    @Column
     private String seatMap;
-
-    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Event> events;
 
     // Constructor sin parámetros
-    public Place(){
+    public PlaceDTO(){
 
     }
 
     //Constructor con parámetros
-    public Place(Long id, String name, String address, String city, String province, String country, Integer totalCapacity, String seatMap, List<Event> events){
+    public PlaceDTO(Long id, String name, String address, String city, String province, String country, Integer totalCapacity, String seatMap, List<Event> events){
         this.id = id;
         this.name = name;
         this.address = address;
@@ -52,36 +32,6 @@ public class Place {
         this.totalCapacity = totalCapacity;
         this.seatMap = seatMap;
         this.events = events;
-    }
-
-    //Pasar de DTO a entidad
-    public Place(PlaceDTO placeDTO){
-        this.id = placeDTO.getId();
-        this.name = placeDTO.getName();
-        this.address = placeDTO.getAddress();
-        this.city = placeDTO.getCity();
-        this.province = placeDTO.getProvince();
-        this.country = placeDTO.getCountry();
-        this.totalCapacity = placeDTO.getTotalCapacity();
-        this.seatMap = placeDTO.getSeatMap();
-        this.events = placeDTO.getEvents();
-    }
-
-    //Pasar de entidad a DTO
-    public static PlaceDTO toDTO(Place place){
-        if (place == null){
-            return null;
-        }return new PlaceDTO(
-                place.getId(),
-                place.getName(),
-                place.getAddress(),
-                place.getCity(),
-                place.getProvince(),
-                place.getCountry(),
-                place.getTotalCapacity(),
-                place.getSeatMap(),
-                place.getEvents()
-        );
     }
 
     //Getter and Setter

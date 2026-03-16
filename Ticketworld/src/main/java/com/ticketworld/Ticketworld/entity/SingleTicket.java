@@ -1,5 +1,6 @@
 package com.ticketworld.Ticketworld.entity;
 
+import com.ticketworld.Ticketworld.dto.SingleTicketDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,7 +14,7 @@ public class SingleTicket {
     @JoinColumn(name = "ticketType_id", nullable = false)
     private TicketType ticketType;
 
-    @Column(nullable = false)
+    @Column(name = "seat_row", nullable = false)
     private Integer row;
 
     @Column(nullable = false)
@@ -29,7 +30,6 @@ public class SingleTicket {
     @Enumerated(EnumType.STRING)
     private State state;
 
-
     //Constructores sin parámetros
     public SingleTicket(){
 
@@ -44,6 +44,32 @@ public class SingleTicket {
         this.ticketCode = ticketCode;
         this.ticketPrice = ticketPrice;
         this.state = state;
+    }
+
+    //Pasar de DTO a entidad
+    public SingleTicket(SingleTicketDTO singleTicketDTO){
+        this.id = singleTicketDTO.getId();
+        this.ticketType = singleTicketDTO.getTicketType();
+        this.row = singleTicketDTO.getRow();
+        this.seatNumber = singleTicketDTO.getSeatNumber();
+        this.ticketCode = singleTicketDTO.getTicketCode();
+        this.ticketPrice = singleTicketDTO.getTicketPrice();
+        this.state = singleTicketDTO.getState();
+    }
+
+    //Pasar de entidad a DTO
+    public static SingleTicketDTO toDTO(SingleTicket singleTicket){
+        if (singleTicket == null){
+            return null;
+        }return new SingleTicketDTO(
+                singleTicket.getId(),
+                singleTicket.getTicketType(),
+                singleTicket.getRow(),
+                singleTicket.getSeatNumber(),
+                singleTicket.getTicketCode(),
+                singleTicket.getTicketPrice(),
+                singleTicket.getState()
+        );
     }
 
     //Getter and Setter

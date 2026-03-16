@@ -1,72 +1,33 @@
-package com.ticketworld.Ticketworld.entity;
+package com.ticketworld.Ticketworld.dto;
 
-import com.ticketworld.Ticketworld.dto.OrderDTO;
-import jakarta.persistence.*;
+import com.ticketworld.Ticketworld.entity.Payment;
+import com.ticketworld.Ticketworld.entity.PurchaseState;
+import com.ticketworld.Ticketworld.entity.User;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "orders")
-public class Order {
+public class OrderDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    @Column(nullable = false)
     private Date purchaseDate;
-
-    @Column(nullable = false)
     private Double total;
-
-    @Enumerated(EnumType.STRING)
     private PurchaseState purchasestate;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "payment_id", referencedColumnName = "id")
     private Payment payment;
 
     //Constructores sin parámetros
-    public Order(){
+    public OrderDTO(){
 
     }
 
     //Constructores con parámetros
-    public Order(Long id, User user, Date purchaseDate, Double total, PurchaseState purchasestate, Payment payment){
+    public OrderDTO(Long id, User user, Date purchaseDate, Double total, PurchaseState purchasestate, Payment payment){
         this.id = id;
         this.user = user;
         this.purchaseDate = purchaseDate;
         this.total = total;
         this.purchasestate = purchasestate;
         this.payment = payment;
-    }
-
-    //Pasar de DTO a entidad
-    public Order(OrderDTO orderDTO){
-        this.id = orderDTO.getId();
-        this.user = orderDTO.getUser();
-        this.purchasestate = orderDTO.getPurchasestate();
-        this.total = orderDTO.getTotal();
-        this.purchaseDate = orderDTO.getPurchaseDate();
-        this.payment = orderDTO.getPayment();
-    }
-
-    //Pasar de entidad a DTO
-    public static OrderDTO toDTO(Order order){
-        if (order == null){
-            return null;
-        }return new OrderDTO(
-                order.getId(),
-                order.getUser(),
-                order.getPurchaseDate(),
-                order.getTotal(),
-                order.getPurchasestate(),
-                order.getPayment()
-        );
     }
 
     //Getter and Setter

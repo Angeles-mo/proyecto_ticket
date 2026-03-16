@@ -1,71 +1,32 @@
-package com.ticketworld.Ticketworld.entity;
+package com.ticketworld.Ticketworld.dto;
 
-import com.ticketworld.Ticketworld.dto.PaymentDTO;
-import jakarta.persistence.*;
-import lombok.ToString;
+import com.ticketworld.Ticketworld.entity.Order;
+import com.ticketworld.Ticketworld.entity.PaymentStatus;
 
 import java.util.Date;
 
-@Entity
-public class Payment {
+public class PaymentDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @OneToOne(mappedBy = "payment")
-    @ToString.Exclude
     private Order order;
-
-    @Column(nullable = false)
     private String paymentMethod;
-
-    @Column(nullable = false)
     private Integer transactionId;
-
-    @Enumerated(EnumType.STRING)
     private PaymentStatus paymentstatus;
-
-    @Column(nullable = false)
     private Date paymentDate;
 
     //Constructores sin parámetros
-    public Payment(){
+    public PaymentDTO(){
 
     }
 
     //Constructores con parámetros
-    public Payment(Long id, Order order, String paymentMethod, Integer transactionId, PaymentStatus paymentstatus, Date paymentDate){
+    public PaymentDTO(Long id, Order order, String paymentMethod, Integer transactionId, PaymentStatus paymentstatus, Date paymentDate){
         this.id = id;
         this.order = order;
         this.paymentMethod = paymentMethod;
         this.transactionId = transactionId;
         this.paymentstatus = paymentstatus;
         this.paymentDate = paymentDate;
-    }
-
-    //Pasar de DTO a entidad
-    public Payment(PaymentDTO paymentDTO){
-        this.id = paymentDTO.getId();
-        this.order = paymentDTO.getOrder();
-        this.paymentMethod = paymentDTO.getPaymentMethod();
-        this.transactionId = paymentDTO.getTransactionId();
-        this.paymentstatus = paymentDTO.getPaymentstatus();
-        this.paymentDate = paymentDTO.getPaymentDate();
-    }
-
-    //Pasar de entidad a DTO
-    public static PaymentDTO toDTO(Payment payment){
-        if (payment == null){
-            return null;
-        }return new PaymentDTO(
-                payment.getId(),
-                payment.getOrder(),
-                payment.getPaymentMethod(),
-                payment.getTransactionId(),
-                payment.getPaymentstatus(),
-                payment.getPaymentDate()
-        );
     }
 
     //Getter and Setter

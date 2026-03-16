@@ -1,10 +1,13 @@
 package com.ticketworld.Ticketworld.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ticketworld.Ticketworld.dto.UserDTO;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -18,20 +21,15 @@ public class User {
     private String lastName;
 
     @Column(nullable = false)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false)
     private String phoneNumber;
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    private Rol role;
-
-    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;
+
+    @OneToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Account account;
 
     // Constructor sin parámetros
     public User(){
@@ -39,15 +37,39 @@ public class User {
     }
 
     // Constructor con parámetros
-    public User(Long id, String name, String lastName, String email, String password, String phoneNumber, Rol role, List<Order> orders){
+    public User(Long id, String name, String lastName, String phoneNumber, List<Order> orders, Account account){
         this.id = id;
         this.name = name;
         this.lastName = lastName;
-        this.email = email;
-        this.password = password;
         this.phoneNumber = phoneNumber;
-        this.role = role;
         this.orders = orders;
+        this.account = account;
+    }
+
+    // Pasar de DTO a entidad
+    public User(UserDTO userDTO){
+        this.id = userDTO.getId();
+        this.name = userDTO.getName();
+        this.lastName = userDTO.getLastName();
+        this.phoneNumber = userDTO.getPhoneNumber();
+        this.orders = userDTO.getOrders();
+        this.account = userDTO.getAccount();
+    }
+
+    // Pasar de una entidad a una DTO
+    public static UserDTO toDTO(User user){
+        if (user == null){
+            return null;
+        }
+        // Return de la creación del nuevo DTO
+        return new UserDTO(
+                user.getId(),
+                user.getName(),
+                user.getLastName(),
+                user.getPhoneNumber(),
+                user.getOrders(),
+                user.getAccount()
+        );
     }
 
     // Getter (nos coge lo que pedimos) y setter (mete lo que le pedimos)
@@ -60,28 +82,20 @@ public class User {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getLastName() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhoneNumber() {
@@ -92,27 +106,19 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public Rol getRole() {
-        return role;
-    }
-
-    public void setRole(Rol role) {
-        this.role = role;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<Order> getOrders() {
         return orders;
     }
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

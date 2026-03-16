@@ -1,5 +1,6 @@
 package com.ticketworld.Ticketworld.entity;
 
+import com.ticketworld.Ticketworld.dto.TicketTypeDTO;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class TicketType {
     @Column(nullable = false)
     private Integer capacity;
 
-    @OneToMany(mappedBy = "singleTickets", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "ticketType", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SingleTicket> singleTickets;
 
     //Constructores sin parámetros
@@ -40,6 +41,31 @@ public class TicketType {
         this.price = price;
         this.capacity = capacity;
         this.singleTickets = singleTickets;
+    }
+
+    //Pasar de DTO a entidad
+    public TicketType(TicketTypeDTO ticketTypeDTO){
+        this.id = ticketTypeDTO.getId();
+        this.event = ticketTypeDTO.getEvent();
+        this.name = ticketTypeDTO.getName();
+        this.price = ticketTypeDTO.getPrice();
+        this.capacity = ticketTypeDTO.getCapacity();
+        this.singleTickets = ticketTypeDTO.getSingleTickets();
+    }
+
+    //Pasar de entidad a una DTO
+    public static TicketTypeDTO toDTO(TicketType ticketType){
+        if (ticketType == null){
+            return null;
+        }
+        return new TicketTypeDTO(
+                ticketType.getId(),
+                ticketType.getEvent(),
+                ticketType.getName(),
+                ticketType.getPrice(),
+                ticketType.getCapacity(),
+                ticketType.getSingleTickets()
+        );
     }
 
     //Getter and setter
