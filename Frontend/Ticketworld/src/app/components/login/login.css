@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/* Este bloque sirve para definir que ocupe la pantalla completa (100% de la altura) */
+:host {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.login-page {
+  display: flex;
+  height: 100vh;
+  background: #0d0a14;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.login-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: linear-gradient(145deg, #0d0a14 0%, #1a0a2e 60%, #2d1060 100%);
+  overflow: hidden;
+}
+
+.slogan p {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 3rem;
+  line-height: 1.1;
+  color: #f0ebff;
+  text-align: center;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.login-right {
+  width: 45%;
+  min-width: 440px;  
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background: #13101e;
+  border-left: 1px solid rgba(124, 58, 237, 0.25);
+}
+
+.login {
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.login-header h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    letter-spacing: 0.08em;
+    color: #f0ebff;
+    text-align: center;
+    margin: 0;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8b7fa8;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: #1e1830;
+    border: 1px solid rgba(124, 58, 237, 0.25);
+    border-radius: 10px;
+    color: #f0ebff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
+}
+
+.forgot-password {
+    align-self: flex-end;
+    font-size: 0.78rem;
+    color: #8b7fa8;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.forgot-password:hover {
+    color: #c026d3;
+}
+
+button[type="submit"] {
+    margin-top: 0.4rem;
+    padding: 1rem;
+    width: 100%;
+    background: linear-gradient(135deg, #7c3aed, #c026d3);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(192, 38, 211, 0.3);
+}
+
+button[type="submit"]:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 28px rgba(192, 38, 211, 0.45);
+}
+
+button[type="submit"]:active {
+  transform: translateY(0);
+}
+ 
+/* Login footer */
+.login-footer p {
+  font-size: 0.85rem;
+  color:  #8b7fa8;
+  text-align: center;
+  margin: 0;
+}
+ 
+.login-footer a {
+  color: #c026d3;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+ 
+.login-footer a:hover {
+  opacity: 0.8;
+}
+ 
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .login-page {
+    flex-direction: column;
+  }
+ 
+  .login-left {
+    flex: none;
+    padding: 2rem;
+    min-height: 200px;
+  }
+ 
+  .slogan p {
+    font-size: 2rem;
+  }
+ 
+  .login-rigth {
+    width: 100%;
+    min-width: unset;
+    height: auto;
+    border-left: none;
+    border-top: 1px solid rgba(124, 58, 237, 0.25);
+    padding: 2rem 1.5rem;
+  }
+}
