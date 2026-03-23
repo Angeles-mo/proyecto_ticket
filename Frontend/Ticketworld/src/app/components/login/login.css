@@ -15,8 +15,11 @@
   overflow: hidden;
 }
 
+/* ── Login Left ── */
+
 .login-left {
   flex: 1;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,15 +29,115 @@
   overflow: hidden;
 }
 
+/* Efecto de partículas en el fondo */
+
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.particles span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+  opacity: 0.15;
+}
+ 
+.particles span:nth-child(1) {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #7c3aed, transparent);
+  bottom: -80px; left: -80px;
+  animation-delay: 0s;
+}
+ 
+.particles span:nth-child(2) {
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, #c026d3, transparent);
+  top: -60px; right: 10%;
+  animation-delay: 2s;
+}
+ 
+.particles span:nth-child(3) {
+  width: 150px; height: 150px;
+  background: radial-gradient(circle, #7c3aed, transparent);
+  top: 40%; left: 10%;
+  animation-delay: 4s;
+}
+ 
+.particles span:nth-child(4) {
+  width: 100px; height: 100px;
+  background: radial-gradient(circle, #c026d3, transparent);
+  bottom: 20%; right: 5%;
+  animation-delay: 1s;
+}
+ 
+.particles span:nth-child(5) {
+  width: 80px; height: 80px;
+  background: radial-gradient(circle, #7c3aed, transparent);
+  top: 20%; left: 30%;
+  animation-delay: 3s;
+}
+ 
+.particles span:nth-child(6) {
+  width: 60px; height: 60px;
+  background: radial-gradient(circle, #c026d3, transparent);
+  bottom: 40%; left: 60%;
+  animation-delay: 5s;
+}
+ 
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1);   opacity: 0.15; }
+  50%       { transform: translateY(-30px) scale(1.1); opacity: 0.25; }
+}
+
+/* Slogan */
+
+.slogan {
+  z-index: 1;
+  text-align: center;
+}
+
 .slogan p {
   font-family: 'Bebas Neue', cursive;
   font-size: 3rem;
-  line-height: 1.1;
+  line-height: 1.5;
   color: #f0ebff;
   text-align: center;
   letter-spacing: 0.04em;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
 }
+
+.slogan p span {
+  display: block;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.8s ease forwards;
+}
+ 
+.slogan p span:nth-child(1) { animation-delay: 0.2s; }
+.slogan p span:nth-child(2) { animation-delay: 0.5s; }
+.slogan p span:nth-child(3) {
+  animation-delay: 0.8s;
+  background: linear-gradient(135deg, #7c3aed, #c026d3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+ 
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Login Right ── */
 
 .login-right {
   width: 45%;
@@ -43,10 +146,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 2rem;
+  padding: 4rem 3rem;
   background: #13101e;
   border-left: 1px solid rgba(124, 58, 237, 0.25);
+  animation: fadeIn 0.6s ease forwards;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Login Form ── */
 
 .login {
     width: 100%;
@@ -58,12 +169,21 @@
 
 .login-header h2 {
     font-family: 'Bebas Neue', cursive;
-    font-size: 2.5rem;
+    font-size: 3rem;
     letter-spacing: 0.08em;
     color: #f0ebff;
     text-align: center;
     margin: 0;
 }
+
+.login-header p {
+  font-size: 0.95rem;
+  color: #8b7fa8;
+  text-align: center;
+  margin: 0;
+}
+
+/* Formulario de login */
 
 .login-form {
     display: flex;
@@ -99,12 +219,19 @@
     box-sizing: border-box;
 }
 
+.form-group input::placeholder {
+  color: rgba(139, 127, 168, 0.4);
+}
+
 .form-group input:focus {
     border-color: #7c3aed;
+    background: #251e3a;
     box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
 }
 
-.forgot-password {
+/* Enlace de "Olvidé mi contraseña" */
+
+.forgot {
     align-self: flex-end;
     font-size: 0.78rem;
     color: #8b7fa8;
@@ -112,9 +239,11 @@
     transition: color 0.2s;
 }
 
-.forgot-password:hover {
+.forgot:hover {
     color: #c026d3;
 }
+
+/* Botón de submit */
 
 button[type="submit"] {
     margin-top: 0.4rem;
@@ -131,6 +260,21 @@ button[type="submit"] {
     cursor: pointer;
     transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
     box-shadow: 0 4px 20px rgba(192, 38, 211, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+button[type="submit"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #c026d3, #7c3aed);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+ 
+button[type="submit"]:hover::after {
+  opacity: 1;
 }
 
 button[type="submit"]:hover {
