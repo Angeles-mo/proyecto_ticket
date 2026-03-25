@@ -306,6 +306,14 @@ button[type="submit"]:active {
   opacity: 0.8;
 }
  
+/* Mensaje de error */
+.error {
+  color: #c026d3;
+  font-size: 0.85rem;
+  text-align: center;
+  margin: 0;
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .login-page {
