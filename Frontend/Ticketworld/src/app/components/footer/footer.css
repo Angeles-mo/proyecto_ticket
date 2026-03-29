@@ -1,0 +1,73 @@
+/* Importación de la fuente Bebas Neue */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.footer {
+  background-color: #0d0a14;
+  color: #f0ebff;
+  padding: 3rem 0 1.5rem 0;
+  border-top: 1px solid rgba(124, 58, 237, 0.25);
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.logo-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-style: italic;
+  font-size: 1.8rem !important;
+  color: #c026d3;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+/* Centrado de las columnas y títulos */
+.footer .col-md-4 {
+  text-align: center; /* Centra el texto de la columna */
+  margin-bottom: 2rem;
+}
+
+.footer h5 {
+  color: #7c3aed;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  font-size: 1.4rem;
+  border-bottom: 2px solid #4c1d95;
+  display: inline-block; /* Permite que el borde solo ocupe el ancho del texto */
+}
+
+/* Ajuste de listas para que no tengan padding lateral */
+.footer ul {
+  padding: 0;
+  list-style: none;
+}
+
+.footer ul li {
+  margin-bottom: 0.6rem;
+  font-family: sans-serif;
+  color: #f0ebff;
+}
+
+.footer .text-dark {
+  color: #8b7fa8 !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+}
+
+.footer .text-dark:hover {
+  color: #c026d3 !important;
+}
+
+/* Copyright centrado */
+.footer .mt-3 {
+  border-top: 1px solid rgba(124, 58, 237, 0.25);
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.footer .text-muted {
+  color: #8b7fa8 !important;
+  font-family: sans-serif;
+  font-size: 0.85rem;
+}

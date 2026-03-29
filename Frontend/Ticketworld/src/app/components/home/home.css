@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+:host {
+  display: block;
+  background-color: #0d0a14;
+  color: #f0ebff;
+  min-height: 100vh;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  max-width: 1000px;      /* limita el ancho total */
+  margin: 0 auto;         /* centra el bloque */
+  padding-left: 20px;     /* margen en móvil */
+  padding-right: 20px;
+}
+
+h1 {
+  color: #c026d3;
+  font-size: 4rem;
+  text-transform: uppercase;
+  font-style: italic;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 0px #4c1d95;
+}
+
+/* Títulos de Conciertos / Festivales */
+.section-title {
+  font-size: 2.5rem;
+  color: #7c3aed;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  display: block; /* Asegura que ocupe toda la línea */
+}
+
+/* Contenedor de las tarjetas */
+.cards-grid {
+  display: flex;
+  flex-wrap: wrap; /* Permite que bajen si no caben */
+  gap: 20px;       /* Espacio entre tarjetas */
+  align-items: stretch; /* CLAVE: Estira las tarjetas para que midan lo mismo */
+}
+
+/* Estilización de las Cards */
+.card {
+  background-color: #13101e !important;
+  border: 1px solid rgba(124, 58, 237, 0.25) !important;
+  color: #f0ebff !important;
+  border-radius: 0px;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 280px;
+  max-width: 320px;
+  width: auto;
+  margin: 0;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #c026d3 !important;
+  box-shadow: 0 0 15px rgba(192, 38, 211, 0.3);
+}
+
+.card-title {
+  color: #c026d3;
+  font-size: 1.8rem;
+}
+
+.card-subtitle {
+  color: #8b7fa8 !important;
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  min-height: 40px; /* Para que los subtítulos largos no muevan todo */
+}
+
+.card-text {
+  font-family: sans-serif;
+  color: #f0ebff;
+  opacity: 0.9;
+  flex-grow: 1; /* Empuja el link hacia abajo */
+}
+
+.card-link {
+  color: #7c3aed !important;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  margin-top: auto; /* Alinea el enlace siempre al fondo de la tarjeta */
+}
+
+.card-link:hover {
+  color: #c026d3 !important;
+}
