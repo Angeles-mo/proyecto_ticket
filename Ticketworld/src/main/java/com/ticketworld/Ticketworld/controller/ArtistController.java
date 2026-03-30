@@ -1,7 +1,7 @@
 package com.ticketworld.Ticketworld.controller;
 
-import com.ticketworld.Ticketworld.dto.AccountDTO;
 import com.ticketworld.Ticketworld.dto.ArtistDTO;
+import com.ticketworld.Ticketworld.dto.ArtistRequestDTO;
 import com.ticketworld.Ticketworld.entity.Account;
 import com.ticketworld.Ticketworld.services.ArtistService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.PublicKey;
 
 @RestController
 @RequestMapping("/api/artists")
@@ -54,11 +52,11 @@ public class ArtistController {
     }
 
     @PostMapping
-    @Operation(summary = "Create the artist")
+    @Operation(summary = "Create the artist",
+            description = "Create an artist and their associated account. Send 'artist' and 'account' in the same JSON.")
     public ResponseEntity<?> createArtist(@AuthenticationPrincipal Account account,
-                                          @RequestBody ArtistDTO artistDTO,
-                                          @RequestBody AccountDTO accountDTO){
-        return artistService.createArtist(account, artistDTO, accountDTO);
+                                          @RequestBody ArtistRequestDTO artistRequestDTO){
+        return artistService.createArtist(account, artistRequestDTO.getArtist(), artistRequestDTO.getAccount());
     }
 
 }

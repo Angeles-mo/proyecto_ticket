@@ -42,7 +42,10 @@ public class AuthController {
         Account account = accountService.findByEmail(request.getEmail());
         String token = jwtService.generateToken(account);
 
-        return ResponseEntity.ok(Map.of("token", token, "role", account.getRole()));
+        return ResponseEntity.ok(Map.of(
+                "token", token,
+                "role", account.getRole(),
+                "hasArtist", account.getArtist() != null));
     }
 
     @PostMapping("/register")

@@ -2,6 +2,7 @@ package com.ticketworld.Ticketworld.controller;
 
 import com.ticketworld.Ticketworld.dto.AccountDTO;
 import com.ticketworld.Ticketworld.dto.UserDTO;
+import com.ticketworld.Ticketworld.dto.UserRequestDTO;
 import com.ticketworld.Ticketworld.entity.Account;
 import com.ticketworld.Ticketworld.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,10 +53,10 @@ public class UserController {
     }
 
     @PostMapping
-    @Operation(summary = "Create the user")
+    @Operation(summary = "Create the user",
+            description = "Create a user and their associated account. Send 'user' and 'account' in the same JSON.")
     public ResponseEntity<?> createUser(@AuthenticationPrincipal Account account,
-                                        @RequestBody UserDTO userDTO,
-                                        @RequestBody AccountDTO accountDTO){
-        return userService.createUser(account, userDTO, accountDTO);
+                                        @RequestBody UserRequestDTO userRequestDTO){
+        return userService.createUser(account, userRequestDTO.getUser(), userRequestDTO.getAccount());
     }
 }
