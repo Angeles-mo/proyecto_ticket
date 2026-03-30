@@ -59,8 +59,6 @@ public class Artist {
         this.lastName = artistDTO.getLastName();
         this.musicGenre = artistDTO.getMusicGenre();
         this.biography = artistDTO.getBiography();
-        this.events = artistDTO.getEvents();
-        this.account = artistDTO.getAccount();
     }
 
     //Pasar de una entidad a una DTO
@@ -73,9 +71,7 @@ public class Artist {
                 artist.getName(),
                 artist.getLastName(),
                 artist.getMusicGenre(),
-                artist.getBiography(),
-                artist.getEvents(),
-                artist.getAccount()
+                artist.getBiography()
         );
     }
 

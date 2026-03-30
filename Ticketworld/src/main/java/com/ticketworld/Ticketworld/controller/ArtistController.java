@@ -60,14 +60,20 @@ public class ArtistController {
     @Operation(summary = "Create the artist",
             description = "Create an artist and their associated account. Send 'artist' and 'account' in the same JSON.")
     public ResponseEntity<?> createArtist(@AuthenticationPrincipal UserDetails userDetails,
-                                          @RequestBody ArtistDTO artistDTO){
+                                          @RequestBody ArtistRequestDTO artistRequestDTO){
+
+        System.out.println(">>> userDetails: " + userDetails);
+        System.out.println(">>> artistRequestDTO: " + artistRequestDTO);
+        System.out.println(">>> artist: " + (artistRequestDTO != null ? artistRequestDTO.getArtist() : "NULL"));
+
         if (userDetails == null){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
         }
 
         Account account = accountService.findByEmail(userDetails.getUsername());
+        System.out.println(">>> account encontrado: " + account);
 
-        return artistService.createArtist(account, artistDTO);
+        return artistService.createArtist(account, artistRequestDTO.getArtist());
     }
 
 }

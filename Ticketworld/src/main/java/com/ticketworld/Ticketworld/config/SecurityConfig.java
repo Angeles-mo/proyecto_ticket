@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -37,7 +38,10 @@ public class SecurityConfig {
                         s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/artists/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/artists/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/artists/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT,"/api/artists/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE,"/api/artists/**").authenticated()
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",

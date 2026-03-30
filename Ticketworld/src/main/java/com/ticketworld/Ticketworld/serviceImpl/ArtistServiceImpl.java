@@ -80,8 +80,6 @@ public class ArtistServiceImpl implements ArtistService {
             artist.setLastName(artistDTO.getLastName());
             artist.setMusicGenre(artistDTO.getMusicGenre());
             artist.setBiography(artistDTO.getBiography());
-            artist.setEvents(artistDTO.getEvents());
-            artist.setAccount(artistDTO.getAccount());
 
             //Aquí relacionamos la cuenta y el artista
             artist.setAccount(loggedAccount);
@@ -115,8 +113,6 @@ public class ArtistServiceImpl implements ArtistService {
         existingArtist.setLastName(artistDTO.getLastName());
         existingArtist.setMusicGenre(artistDTO.getMusicGenre());
         existingArtist.setBiography(artistDTO.getBiography());
-        existingArtist.setEvents(artistDTO.getEvents());
-        existingArtist.setEvents(artistDTO.getEvents());
 
         Artist updateArtist = artistRepository.save(existingArtist);
         return ResponseEntity.ok(Artist.toDTO(updateArtist));

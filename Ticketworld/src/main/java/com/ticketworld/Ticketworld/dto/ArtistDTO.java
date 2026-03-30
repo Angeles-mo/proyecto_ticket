@@ -1,11 +1,5 @@
 package com.ticketworld.Ticketworld.dto;
 
-import com.ticketworld.Ticketworld.entity.Account;
-import com.ticketworld.Ticketworld.entity.Event;
-
-import java.util.HashSet;
-import java.util.Set;
-
 public class ArtistDTO {
 
     private Long id;
@@ -13,22 +7,18 @@ public class ArtistDTO {
     private String lastName;
     private String musicGenre;
     private String biography;
-    private Set<Event> events = new HashSet<>();
-    private Account account;
 
     //Constructor sin parámetros
     public ArtistDTO(){
     }
 
     //Constructor con parámetros
-    public ArtistDTO(Long id, String name, String lastName, String musicGenre, String biography, Set<Event> events, Account account){
+    public ArtistDTO(Long id, String name, String lastName, String musicGenre, String biography){
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.musicGenre = musicGenre;
         this.biography = biography;
-        this.events = events;
-        this.account = account;
     }
 
     //Getters and Setters
@@ -71,21 +61,5 @@ public class ArtistDTO {
 
     public void setBiography(String biography) {
         this.biography = biography;
-    }
-
-    public Set<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(Set<Event> events) {
-        this.events = events;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 }

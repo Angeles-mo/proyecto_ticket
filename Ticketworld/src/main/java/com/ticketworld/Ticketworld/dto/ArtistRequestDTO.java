@@ -3,16 +3,14 @@ package com.ticketworld.Ticketworld.dto;
 public class ArtistRequestDTO {
 
     private ArtistDTO artist;
-    private AccountDTO account;
 
     // Constructor sin parámetros
     public ArtistRequestDTO() {
     }
 
     // Constructor con parámetros
-    public ArtistRequestDTO(ArtistDTO artist, AccountDTO account) {
+    public ArtistRequestDTO(ArtistDTO artist) {
         this.artist = artist;
-        this.account = account;
     }
 
     // Getters y Setters
@@ -23,13 +21,5 @@ public class ArtistRequestDTO {
 
     public void setArtist(ArtistDTO artist) {
         this.artist = artist;
-    }
-
-    public AccountDTO getAccount() {
-        return account;
-    }
-
-    public void setAccount(AccountDTO account) {
-        this.account = account;
     }
 }
