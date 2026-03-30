@@ -20,16 +20,25 @@
       </form>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Mi cuenta
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Mi perfil</a></li>
-            <li><a class="dropdown-item" href="#">Mis entradas</a></li>
-            <li *ngIf="isArtist"><a class="dropdown-item" href="#">Mis eventos</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-          </ul>
+          <ng-container *ngIf="isLoggedIn; else guestMenu">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Mi cuenta
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+              <li><a class="dropdown-item" href="#">Mis entradas</a></li>
+              <li *ngIf="isArtist"><a class="dropdown-item" href="#">Mis eventos</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Cerrar sesión</a></li>
+            </ul>
+          </ng-container>
+          <ng-template #guestMenu>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Iniciar sesión / Registrarse</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/login">Iniciar sesión</a></li>
+              <li><a class="dropdown-item" routerLink="/register">Registrarse</a></li>
+            </ul>
+          </ng-template>
         </li>
       </ul>
     </div>

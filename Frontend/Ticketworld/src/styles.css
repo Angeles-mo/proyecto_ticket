@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Variables de color para mantener la consistencia en el diseño */
+:root {
+  --magenta:    #c026d3;
+  --violet:     #7c3aed;
+  --violet-dim: #4c1d95;
+  --dark:       #0d0a14;
+  --dark-card:  #13101e;
+  --dark-input: #1e1830;
+  --text:       #f0ebff;
+  --muted:      #8b7fa8;
+  --border:     rgba(124, 58, 237, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}

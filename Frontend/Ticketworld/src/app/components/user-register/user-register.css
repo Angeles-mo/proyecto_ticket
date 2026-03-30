@@ -144,7 +144,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 8rem 3rem 3rem 3rem;
+  padding: 3rem;
   background: #13101e;
   border-left: 1px solid rgba(124, 58, 237, 0.25);
   overflow-y: auto;
@@ -213,17 +213,41 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #8b7fa8;
-  margin-bottom: 1rem;
-  display: block;
-  text-align: center;
+  margin-bottom: 0.4rem;
+}
+
+/* Inputs */
+
+.register-form .form-control {
   width: 100%;
+  padding: 0.85rem 1rem;
+  background: #1e1830;
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  border-radius: 10px;
+  color: #f0ebff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  box-sizing: border-box;
+}
+
+.register-form .form-control::placeholder {
+  color: rgba(139, 127, 168, 0.4);
+}
+
+.register-form .form-control:focus {
+  border-color: #7c3aed;
+  background: #251e3a;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
+  color: #f0ebff;
 }
 
 /* Botón de submit */
 
 .register-form .btn-primary {
   width: 100%;
-  padding: 1.2rem;
+  padding: 1rem;
   background: linear-gradient(135deg, #7c3aed, #c026d3);
   border: none;
   border-radius: 10px;
@@ -237,7 +261,6 @@
   box-shadow: 0 4px 20px rgba(192, 38, 211, 0.3);
   position: relative;
   overflow: hidden;
-  margin-bottom: 1.5rem;
 }
 
 .register-form .btn-primary::after {

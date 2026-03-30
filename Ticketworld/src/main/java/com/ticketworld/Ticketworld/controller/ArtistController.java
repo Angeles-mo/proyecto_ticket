@@ -3,6 +3,7 @@ package com.ticketworld.Ticketworld.controller;
 import com.ticketworld.Ticketworld.dto.ArtistDTO;
 import com.ticketworld.Ticketworld.dto.ArtistRequestDTO;
 import com.ticketworld.Ticketworld.entity.Account;
+import com.ticketworld.Ticketworld.services.AccountService;
 import com.ticketworld.Ticketworld.services.ArtistService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,6 +22,9 @@ public class ArtistController {
 
     @Autowired
     private ArtistService artistService;
+
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping
     @Operation(summary = "Get all artists")
@@ -54,9 +59,15 @@ public class ArtistController {
     @PostMapping
     @Operation(summary = "Create the artist",
             description = "Create an artist and their associated account. Send 'artist' and 'account' in the same JSON.")
-    public ResponseEntity<?> createArtist(@AuthenticationPrincipal Account account,
-                                          @RequestBody ArtistRequestDTO artistRequestDTO){
-        return artistService.createArtist(account, artistRequestDTO.getArtist(), artistRequestDTO.getAccount());
+    public ResponseEntity<?> createArtist(@AuthenticationPrincipal UserDetails userDetails,
+                                          @RequestBody ArtistDTO artistDTO){
+        if (userDetails == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
+        }
+
+        Account account = accountService.findByEmail(userDetails.getUsername());
+
+        return artistService.createArtist(account, artistDTO);
     }
 
 }

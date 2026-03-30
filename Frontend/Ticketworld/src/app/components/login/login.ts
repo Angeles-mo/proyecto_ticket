@@ -26,7 +26,9 @@ export class LoginComponent {
       next: (response) => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('role', response.role);
+        localStorage.setItem('hasArtist', response.hasArtist);
         this.router.navigate(['/home']);
+        this.authService.updateLoginStatus(true);
       },
       error: (err) => {
         this.errorMessage = 'Email o contraseña incorrectos';
@@ -34,4 +36,5 @@ export class LoginComponent {
       }
     });
   }
+  
 }

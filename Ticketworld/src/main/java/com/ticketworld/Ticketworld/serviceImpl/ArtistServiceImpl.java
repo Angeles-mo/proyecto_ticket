@@ -1,6 +1,5 @@
 package com.ticketworld.Ticketworld.serviceImpl;
 
-import com.ticketworld.Ticketworld.dto.AccountDTO;
 import com.ticketworld.Ticketworld.dto.ArtistDTO;
 import com.ticketworld.Ticketworld.dto.ErrorDTO;
 import com.ticketworld.Ticketworld.entity.Account;
@@ -66,22 +65,16 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> createArtist(Account loggedAccount, ArtistDTO artistDTO, AccountDTO accountDTO) {
+    public ResponseEntity<?> createArtist(Account loggedAccount, ArtistDTO artistDTO) {
         try {
-            //Creamos y guardamos la cuenta
-            Account account = new Account();
-            account.setEmail(accountDTO.getEmail());
-            account.setPassword(accountDTO.getPassword());
-            account.setRole(account.getRole());
-            account.setArtist(account.getArtist());
 
-            //Encriptamos la contraseña
-            account.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
+            //Verificamos si la cuenta ya tiene un artista (para evitar duplicados)
+            if (loggedAccount.getArtist() != null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ErrorDTO("This account already has an artist profile"));
+            }
 
-            //Guardamos la cuenta
-            Account saveAccount = accountRepository.save(account);
-
-            //Creamos al artista y lo asociamos a la nueva cuenta
+            //Creamos al artista
             Artist artist = new Artist();
             artist.setName(artistDTO.getName());
             artist.setLastName(artistDTO.getLastName());
@@ -91,7 +84,7 @@ public class ArtistServiceImpl implements ArtistService {
             artist.setAccount(artistDTO.getAccount());
 
             //Aquí relacionamos la cuenta y el artista
-            artist.setAccount(saveAccount);
+            artist.setAccount(loggedAccount);
 
             //Guardamos al artista
             Artist savedArtist = artistRepository.save(artist);
