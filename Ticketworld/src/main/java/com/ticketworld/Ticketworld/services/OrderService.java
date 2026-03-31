@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface OrderService {
 
-    ResponseEntity<?> getAll();
+    ResponseEntity<?> getAll(Account loggedAccount);
     ResponseEntity<?> createOrder(Account loggedAccount, OrderDTO orderDTO);
     ResponseEntity<?> getById(Long id);
     ResponseEntity<?> deleteOrder(Account loggedAccount, Long id);

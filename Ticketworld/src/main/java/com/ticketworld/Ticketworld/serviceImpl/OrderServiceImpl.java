@@ -20,17 +20,21 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Override
-    public ResponseEntity<?> getAll() {
-        List<Order> orders = orderRepository.findAll();
-        return new ResponseEntity<>(orders, HttpStatus.OK);
+    public ResponseEntity<?> getAll(Account loggedAccount) {
+        if (loggedAccount.getRole().name().equals("ADMIN")) {
+            return ResponseEntity.ok(orderRepository.findAll());
+        } else if (loggedAccount.getRole().name().equals("CUSTOMER")) {
+            return ResponseEntity.ok(orderRepository.findByUserId(loggedAccount.getUser().getId()));
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(new ErrorDTO("You don't have permission"));
     }
 
     @Override
     public ResponseEntity<?> createOrder(Account loggedAccount, OrderDTO orderDTO) {
-        //Comprobamos si tiene Role de ADMIN y si no lo tiene, da error
-        if (!isAdmin(loggedAccount)){
+        if (!loggedAccount.getRole().name().equals("CUSTOMER")) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(new ErrorDTO("You don't have permission to create an order"));
+                    .body(new ErrorDTO("Only customers can create orders"));
         }
         Order order = new Order();
         mapDTOToEntity(orderDTO, order);

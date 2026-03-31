@@ -22,10 +22,9 @@ public class PaymentController {
 
     @GetMapping
     @Operation(summary = "Get all the payments")
-    public ResponseEntity<?> getAllPayments(){
-        return paymentService.getAll();
+    public ResponseEntity<?> getAllPayments(@AuthenticationPrincipal Account account) {
+        return paymentService.getAll(account);
     }
-
     @GetMapping("/{id}")
     @Operation(summary = "Get the payment by ID")
     public ResponseEntity<?> getPaymentById(@PathVariable Long id){

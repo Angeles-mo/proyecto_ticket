@@ -62,16 +62,18 @@ public class ArtistController {
     public ResponseEntity<?> createArtist(@AuthenticationPrincipal UserDetails userDetails,
                                           @RequestBody ArtistRequestDTO artistRequestDTO){
 
+        /*
         System.out.println(">>> userDetails: " + userDetails);
         System.out.println(">>> artistRequestDTO: " + artistRequestDTO);
         System.out.println(">>> artist: " + (artistRequestDTO != null ? artistRequestDTO.getArtist() : "NULL"));
+         */
 
         if (userDetails == null){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
         }
 
         Account account = accountService.findByEmail(userDetails.getUsername());
-        System.out.println(">>> account encontrado: " + account);
+        /*System.out.println(">>> account encontrado: " + account);*/
 
         return artistService.createArtist(account, artistRequestDTO.getArtist());
     }

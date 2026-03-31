@@ -22,8 +22,8 @@ public class OrderController {
 
     @GetMapping
     @Operation(summary = "Get all orders")
-    public ResponseEntity<?> getAllOrders(){
-        return orderService.getAll();
+    public ResponseEntity<?> getAllOrders(@AuthenticationPrincipal Account account) {
+        return orderService.getAll(account);
     }
 
     @GetMapping("/{id}")

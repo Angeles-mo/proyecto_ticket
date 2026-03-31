@@ -20,17 +20,21 @@ public class PaymentServiceImpl implements PaymentService {
     private PaymentRepository paymentRepository;
 
     @Override
-    public ResponseEntity<?> getAll() {
-        List<Payment> payments = paymentRepository.findAll();
-        return new ResponseEntity<>(payments, HttpStatus.OK);
+    public ResponseEntity<?> getAll(Account loggedAccount) {
+        if (loggedAccount.getRole().name().equals("ADMIN")) {
+            return ResponseEntity.ok(paymentRepository.findAll());
+        } else if (loggedAccount.getRole().name().equals("CUSTOMER")) {
+            return ResponseEntity.ok(paymentRepository.findByOrderUserId(loggedAccount.getUser().getId()));
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(new ErrorDTO("You don't have permission"));
     }
 
     @Override
     public ResponseEntity<?> createPayment(Account loggedAccount, PaymentDTO paymentDTO) {
-        //Comprobamos si tiene Role de ADMIN y si no lo tiene, da error
-        if (!isAdmin(loggedAccount)){
+        if (!loggedAccount.getRole().name().equals("CUSTOMER")) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(new ErrorDTO("You don't have permission"));
+                    .body(new ErrorDTO("Only customers can create payments"));
         }
         Payment payment = new Payment();
         mapDTOToEntity(paymentDTO, payment);

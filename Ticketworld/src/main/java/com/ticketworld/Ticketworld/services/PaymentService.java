@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface PaymentService {
 
-    ResponseEntity<?> getAll();
+    ResponseEntity<?> getAll(Account loggedAccount);
     ResponseEntity<?> createPayment(Account loggedAccount, PaymentDTO paymentDTO);
     ResponseEntity<?> getById(Long id);
     ResponseEntity<?> deletePayment(Account loggedAccount, Long id);

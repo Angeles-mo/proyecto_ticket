@@ -84,7 +84,7 @@ public class EventServiceImpl implements EventService {
     private void mapDTOToEntity(EventDTO eventDTO, Event event){
         event.setPlace(eventDTO.getPlace());
         event.setTitle(eventDTO.getTitle());
-        event.setDescription(event.getDescription());
+        event.setDescription(eventDTO.getDescription());
         event.setDateStartTime(eventDTO.getDateStartTime());
         event.setDateEndTime(eventDTO.getDateEndTime());
         event.setStatus(eventDTO.getStatus());
