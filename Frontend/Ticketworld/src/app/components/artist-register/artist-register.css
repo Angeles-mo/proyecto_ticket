@@ -14,7 +14,9 @@
   overflow: hidden;
 }
 
-/* Columna izquierda con slogan y partículas */
+/* ═══════════════════════════════════════════════════════════ */
+/* COLUMNA IZQUIERDA - Slogan y Partículas                     */
+/* ═══════════════════════════════════════════════════════════ */
 
 .register-left {
   flex: 1;
@@ -28,8 +30,7 @@
   overflow: hidden;
 }
 
-/* Partículas */
-
+/* Partículas animadas */
 .particles {
   position: absolute;
   inset: 0;
@@ -45,54 +46,71 @@
 }
 
 .particles span:nth-child(1) {
-  width: 300px; height: 300px;
+  width: 300px;
+  height: 300px;
   background: radial-gradient(circle, #7c3aed, transparent);
-  bottom: -80px; left: -80px;
+  bottom: -80px;
+  left: -80px;
   animation-delay: 0s;
 }
 
 .particles span:nth-child(2) {
-  width: 200px; height: 200px;
+  width: 200px;
+  height: 200px;
   background: radial-gradient(circle, #c026d3, transparent);
-  top: -60px; right: 10%;
+  top: -60px;
+  right: 10%;
   animation-delay: 2s;
 }
 
 .particles span:nth-child(3) {
-  width: 150px; height: 150px;
+  width: 150px;
+  height: 150px;
   background: radial-gradient(circle, #7c3aed, transparent);
-  top: 40%; left: 10%;
+  top: 40%;
+  left: 10%;
   animation-delay: 4s;
 }
 
 .particles span:nth-child(4) {
-  width: 100px; height: 100px;
+  width: 100px;
+  height: 100px;
   background: radial-gradient(circle, #c026d3, transparent);
-  bottom: 20%; right: 5%;
+  bottom: 20%;
+  right: 5%;
   animation-delay: 1s;
 }
 
 .particles span:nth-child(5) {
-  width: 80px; height: 80px;
+  width: 80px;
+  height: 80px;
   background: radial-gradient(circle, #7c3aed, transparent);
-  top: 20%; left: 30%;
+  top: 20%;
+  left: 30%;
   animation-delay: 3s;
 }
 
 .particles span:nth-child(6) {
-  width: 60px; height: 60px;
+  width: 60px;
+  height: 60px;
   background: radial-gradient(circle, #c026d3, transparent);
-  bottom: 40%; left: 60%;
+  bottom: 40%;
+  left: 60%;
   animation-delay: 5s;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0) scale(1);      opacity: 0.15; }
-  50%       { transform: translateY(-30px) scale(1.1); opacity: 0.25; }
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-30px) scale(1.1);
+    opacity: 0.25;
+  }
 }
 
 /* Slogan */
-
 .slogan {
   z-index: 1;
   text-align: center;
@@ -118,8 +136,14 @@
   animation: slideUp 0.8s ease forwards;
 }
 
-.slogan p span:nth-child(1) { animation-delay: 0.2s; }
-.slogan p span:nth-child(2) { animation-delay: 0.5s; }
+.slogan p span:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.slogan p span:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
 .slogan p span:nth-child(3) {
   animation-delay: 0.8s;
   background: linear-gradient(135deg, #7c3aed, #c026d3);
@@ -135,14 +159,16 @@
   }
 }
 
-/* Columna derecha con formulario */
+/* ═══════════════════════════════════════════════════════════ */
+/* COLUMNA DERECHA - Formulario                                */
+/* ═══════════════════════════════════════════════════════════ */
 
 .register-right {
   width: 55%;
   min-width: 500px;
   height: 100vh;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding: 3rem;
   background: #13101e;
@@ -152,26 +178,37 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateX(20px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Scrollbar personalizado */
 .register-right::-webkit-scrollbar {
   width: 6px;
 }
+
 .register-right::-webkit-scrollbar-track {
   background: #13101e;
 }
+
 .register-right::-webkit-scrollbar-thumb {
   background: rgba(124, 58, 237, 0.4);
   border-radius: 3px;
 }
+
 .register-right::-webkit-scrollbar-thumb:hover {
   background: rgba(124, 58, 237, 0.7);
 }
 
-/* Formulario de registro */
+/* ═══════════════════════════════════════════════════════════ */
+/* FORMULARIO DE REGISTRO                                       */
+/* ═══════════════════════════════════════════════════════════ */
 
 .register-form {
   width: 100%;
@@ -188,68 +225,112 @@
   letter-spacing: 0.08em;
   color: #f0ebff;
   text-align: center;
-  margin: 0;
+  margin: 0 0 0.5rem 0;
+  animation: slideDown 0.6s ease forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .register-form > p {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #8b7fa8;
   text-align: center;
-  margin: 0;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+  animation: fadeIn 0.8s ease forwards 0.2s both;
 }
 
-/* Grid row de Bootstrap — sobreescribimos variables de color */
-
-.register-form .row {
-  --bs-gutter-x: 1rem;
-  --bs-gutter-y: 1rem;
+/* Formulario */
+.register-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 /* Labels */
-
 .register-form .form-label {
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #8b7fa8;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.8rem;
+  display: block;
+  text-align: left;
 }
 
-/* Inputs */
-
+/* Input fields */
 .register-form .form-control {
   width: 100%;
-  padding: 0.85rem 1rem;
-  background: #1e1830;
-  border: 1px solid rgba(124, 58, 237, 0.25);
-  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 8px;
   color: #f0ebff;
+  font-size: 0.9rem;
   font-family: sans-serif;
-  font-size: 1rem;
+  transition: all 0.3s ease;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   box-sizing: border-box;
 }
 
 .register-form .form-control::placeholder {
-  color: rgba(139, 127, 168, 0.4);
+  color: rgba(240, 235, 255, 0.3);
 }
 
 .register-form .form-control:focus {
-  border-color: #7c3aed;
-  background: #251e3a;
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
-  color: #f0ebff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(124, 58, 237, 0.6);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
 }
 
-/* Botón de submit */
+/* Grid de Bootstrap */
+.register-form .row {
+  --bs-gutter-x: 1rem;
+  --bs-gutter-y: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: calc(var(--bs-gutter-x) * -0.5);
+  margin-left: calc(var(--bs-gutter-x) * -0.5);
+  gap: 0;
+}
 
+.register-form .col-md-6 {
+  flex: 0 0 50% !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Hacer que nombre y apellidos ocupen todo el ancho */
+.register-form .col-md-6:nth-child(1),
+.register-form .col-md-6:nth-child(2) {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+}
+
+.register-form .col-12 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Submit Button */
 .register-form .btn-primary {
   width: 100%;
-  padding: 1rem;
-  background: linear-gradient(135deg, #7c3aed, #c026d3);
-  border: none;
+  padding: 1.1rem 1.5rem;
+  background: linear-gradient(135deg, #7c3aed 0%, #c026d3 100%);
+  border: 1px solid rgba(124, 58, 237, 0.4);
   border-radius: 10px;
   color: white;
   font-family: sans-serif;
@@ -257,36 +338,44 @@
   font-weight: 500;
   letter-spacing: 0.05em;
   cursor: pointer;
-  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 20px rgba(192, 38, 211, 0.3);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 2;
+  margin-top: 1rem;
 }
 
-.register-form .btn-primary::after {
+.register-form .btn-primary::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #c026d3, #7c3aed);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  border-radius: 10px;
   opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.register-form .btn-primary:hover::after {
-  opacity: 1;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .register-form .btn-primary:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   box-shadow: 0 6px 28px rgba(192, 38, 211, 0.45);
+  border-color: rgba(192, 38, 211, 0.6);
+}
+
+.register-form .btn-primary:hover::before {
+  opacity: 1;
 }
 
 .register-form .btn-primary:active {
   transform: translateY(0);
+  box-shadow: 0 2px 12px rgba(192, 38, 211, 0.2);
 }
 
-/* ── Responsive ── */
+/* ═══════════════════════════════════════════════════════════ */
+/* RESPONSIVE DESIGN                                            */
+/* ═══════════════════════════════════════════════════════════ */
 
 @media (max-width: 900px) {
   .register-page {
@@ -299,7 +388,7 @@
   .register-left {
     flex: none;
     padding: 2rem;
-    min-height: 180px;
+    min-height: 200px;
   }
 
   .slogan p {
@@ -314,5 +403,55 @@
     border-top: 1px solid rgba(124, 58, 237, 0.25);
     padding: 2rem 1.5rem;
     overflow-y: visible;
+  }
+
+  .register-form h1 {
+    font-size: 2.2rem;
+  }
+
+  .register-form .form-control {
+    font-size: 1rem;
+  }
+
+  .register-form .col-md-6 {
+    flex: 0 0 100%;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-left {
+    padding: 1.5rem;
+    min-height: 150px;
+  }
+
+  .slogan p {
+    font-size: 1.5rem;
+  }
+
+  .register-right {
+    padding: 1.5rem 1rem;
+  }
+
+  .register-form {
+    gap: 1rem;
+  }
+
+  .register-form h1 {
+    font-size: 1.8rem;
+  }
+
+  .register-form > p {
+    font-size: 0.8rem;
+  }
+
+  .register-form .form-label {
+    font-size: 0.7rem;
+  }
+
+  .register-form .btn-primary {
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
   }
 }

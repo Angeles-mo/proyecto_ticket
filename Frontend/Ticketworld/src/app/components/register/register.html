@@ -17,17 +17,27 @@
         <h1>Crear Cuenta</h1>
         <p>Únete a Ticketworld y comienza a disfrutar de tus eventos favoritos</p>
         <form class="row g-3">
-            <div class="col-md-6">
-                <label class="form-label">Quiero registrarme como:</label>
-                <div class="d-flex flex-column gap-3 pt-2">
-                    <div class="form-check">
-                        <button class="btn btn-primary" routerLink="/user-register">Registrarse como Usuario</button>
-                    </div>
-                    <div class="form-check">
-                        <button class="btn btn-primary" routerLink="/artist-register">Registrarse como Artista</button>
-                    </div>
-                </div>
+          <!-- Email y contraseña (opcional en esta página) -->
+          <div class="col-12">
+            <label for="inputEmail" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="inputEmail" placeholder="tu@email.com">
+          </div>
+          <div class="col-12">
+            <label for="inputPassword" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="inputPassword" placeholder="••••••••">
+          </div>
+          <!-- Sección de selección de tipo de cuenta -->
+          <div class="col-12">
+            <label class="form-label">Quiero registrarme como:</label>
+            <div class="d-flex flex-column gap-3">
+              <button type="button" class="btn btn-primary" routerLink="/user-register">
+                Registrarse como Usuario
+              </button>
+              <button type="button" class="btn btn-primary" routerLink="/artist-register">
+                Registrarse como Artista
+              </button>
             </div>
+          </div>
         </form>
     </div>
   </div>
