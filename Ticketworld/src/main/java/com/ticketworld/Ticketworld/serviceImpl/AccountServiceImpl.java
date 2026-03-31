@@ -5,6 +5,7 @@ import com.ticketworld.Ticketworld.entity.Account;
 import com.ticketworld.Ticketworld.repositories.AccountRepository;
 import com.ticketworld.Ticketworld.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Account findByEmail(String email) {
@@ -21,8 +25,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDTO save(AccountDTO accountDTO) {
-        Account account = new Account(accountDTO);             // usa tu constructor
+
+        //Encriptamos la contraseña
+        accountDTO.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
+
+        Account account = new Account(accountDTO);
         Account saved = accountRepository.save(account);
-        return Account.toDTO(saved);                           // usa tu metodo toDTO
+        return Account.toDTO(saved);
     }
 }

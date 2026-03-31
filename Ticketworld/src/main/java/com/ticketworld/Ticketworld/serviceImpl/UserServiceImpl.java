@@ -1,6 +1,5 @@
 package com.ticketworld.Ticketworld.serviceImpl;
 
-import com.ticketworld.Ticketworld.dto.AccountDTO;
 import com.ticketworld.Ticketworld.dto.ErrorDTO;
 import com.ticketworld.Ticketworld.dto.UserDTO;
 import com.ticketworld.Ticketworld.entity.Account;
@@ -70,33 +69,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> createUser(Account loggedAccount, UserDTO userDTO, AccountDTO accountDTO) {
+    public ResponseEntity<?> createUser(Account loggedAccount, UserDTO userDTO) {
         try {
-            //Creamos y guardamos la cuenta
-            Account account = new Account();
-            account.setEmail(accountDTO.getEmail());
-            account.setPassword(accountDTO.getPassword());
-            account.setRole(account.getRole());
-            account.setUser(account.getUser());
 
-            //Encriptamos la contraseña
-            account.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
+            //Verificamos si la cuenta ya tiene un usuario (para evitar duplicados)
+            if (loggedAccount.getUser() != null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ErrorDTO("This account already has a user profile"));
+            }
 
-            //Guardamos la cuenta
-            Account saveAccount = accountRepository.save(account);
-
-            //Creamos el usuario y lo asociamos a la nueva cuenta
+            //Creamos el usuario
             User user = new User();
             user.setName(userDTO.getName());
             user.setLastName(userDTO.getLastName());
             user.setPhoneNumber(userDTO.getPhoneNumber());
-            user.setOrders(userDTO.getOrders());
-            user.setAccount(userDTO.getAccount());
 
             //Aquí relacionamos la cuenta y el usuario
-            user.setAccount(saveAccount);
+            user.setAccount(loggedAccount);
 
-            //Guardamos el usuario
             User savedUser = userRepository.save(user);
 
             //Retornamos un DTO de respuesta
@@ -126,8 +116,6 @@ public class UserServiceImpl implements UserService {
         existingUser.setName(userDTO.getName());
         existingUser.setLastName(userDTO.getLastName());
         existingUser.setPhoneNumber(userDTO.getPhoneNumber());
-        existingUser.setOrders(userDTO.getOrders());
-        existingUser.setAccount(userDTO.getAccount());
 
         User updateUser = userRepository.save(existingUser);
         return ResponseEntity.ok(User.toDTO(updateUser));

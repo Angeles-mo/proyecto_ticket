@@ -28,9 +28,10 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authManager;
-    @Autowired private JwtService jwtService;
-    @Autowired private AccountService accountService;
-    @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtService jwtService;
+    @Autowired
+    private AccountService accountService;
 
     @PostMapping("/login")
     @Operation(summary = "Log in", description = "Returns a JWT token")
@@ -52,7 +53,6 @@ public class AuthController {
     @PostMapping("/register")
     @Operation(summary = "Register account", description = "Create a new account")
     public ResponseEntity<?> register(@RequestBody AccountDTO accountDTO) {
-        accountDTO.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
         accountService.save(accountDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

@@ -1,9 +1,5 @@
 package com.ticketworld.Ticketworld.dto;
 
-import com.ticketworld.Ticketworld.entity.Account;
-import com.ticketworld.Ticketworld.entity.Order;
-
-import java.util.List;
 
 public class UserDTO {
 
@@ -11,8 +7,6 @@ public class UserDTO {
     private String name;
     private String lastName;
     private String phoneNumber;
-    private List<Order> orders;
-    private Account account;
 
     // Constructor sin parámetros
     public UserDTO(){
@@ -20,13 +14,11 @@ public class UserDTO {
     }
 
     // Constructor con parámetros
-    public UserDTO(Long id, String name, String lastName, String phoneNumber, List<Order> orders, Account account){
+    public UserDTO(Long id, String name, String lastName, String phoneNumber){
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.orders = orders;
-        this.account = account;
     }
 
     // Getter (nos coge lo que pedimos) y setter (mete lo que le pedimos)
@@ -61,21 +53,5 @@ public class UserDTO {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 }

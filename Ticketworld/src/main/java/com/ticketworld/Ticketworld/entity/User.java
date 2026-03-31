@@ -52,8 +52,6 @@ public class User {
         this.name = userDTO.getName();
         this.lastName = userDTO.getLastName();
         this.phoneNumber = userDTO.getPhoneNumber();
-        this.orders = userDTO.getOrders();
-        this.account = userDTO.getAccount();
     }
 
     // Pasar de una entidad a una DTO
@@ -66,9 +64,7 @@ public class User {
                 user.getId(),
                 user.getName(),
                 user.getLastName(),
-                user.getPhoneNumber(),
-                user.getOrders(),
-                user.getAccount()
+                user.getPhoneNumber()
         );
     }
 

@@ -19,10 +19,10 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtService jwtService;         // ← tu clase JwtService
+    private JwtService jwtService;
 
     @Autowired
-    private JwtUserDetails jwtUserDetails; // ← tu clase JwtUserDetails
+    private JwtUserDetails jwtUserDetails;
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
@@ -46,12 +46,12 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         String token = header.substring(7);
-        String email = jwtService.extractUsername(token); // ← metodo de tu JwtService
+        String email = jwtService.extractUsername(token);
 
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = jwtUserDetails.loadUserByUsername(email); // ← tu JwtUserDetails
+            UserDetails userDetails = jwtUserDetails.loadUserByUsername(email);
 
-            if (jwtService.isTokenValid(token, userDetails)) { // ← metodo de tu JwtService
+            if (jwtService.isTokenValid(token, userDetails)) {
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails, null, userDetails.getAuthorities());

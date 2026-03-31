@@ -1,9 +1,9 @@
 package com.ticketworld.Ticketworld.controller;
 
-import com.ticketworld.Ticketworld.dto.AccountDTO;
 import com.ticketworld.Ticketworld.dto.UserDTO;
 import com.ticketworld.Ticketworld.dto.UserRequestDTO;
 import com.ticketworld.Ticketworld.entity.Account;
+import com.ticketworld.Ticketworld.services.AccountService;
 import com.ticketworld.Ticketworld.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +22,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping()
     @Operation(summary = "Get all the users")
@@ -55,8 +59,13 @@ public class UserController {
     @PostMapping
     @Operation(summary = "Create the user",
             description = "Create a user and their associated account. Send 'user' and 'account' in the same JSON.")
-    public ResponseEntity<?> createUser(@AuthenticationPrincipal Account account,
+    public ResponseEntity<?> createUser(@AuthenticationPrincipal UserDetails userDetails,
                                         @RequestBody UserRequestDTO userRequestDTO){
-        return userService.createUser(account, userRequestDTO.getUser(), userRequestDTO.getAccount());
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
+        }
+
+        Account account = accountService.findByEmail(userDetails.getUsername());
+        return userService.createUser(account, userRequestDTO.getUser());
     }
 }
